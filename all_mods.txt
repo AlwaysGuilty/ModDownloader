@@ -1,0 +1,27 @@
+# mod-name-like-so,link to 1.19.1-1.19.2,link to 1.19.3
+# mods from modrinth (they are also on curseforge):
+better-f3,https://cdn.modrinth.com/data/8shC1gFX/versions/RbNy07Bx/BetterF3-4.0.0-Fabric-1.19.2.jar,https://cdn.modrinth.com/data/8shC1gFX/versions/nuKBXZDI/BetterF3-5.1.0-Fabric-1.19.3.jar
+boosted-brightness,https://cdn.modrinth.com/data/Abyk2Hrg/versions/2.1.2/boosted-brightness-2.1.2%2B1.19.jar,https://cdn.modrinth.com/data/Abyk2Hrg/versions/e71zpNky/boosted-brightness-2.1.3%2B1.19.3.jar
+# essential is version invariant
+essential,https://cdn.modrinth.com/data/k2ZPuTBm/versions/1.0.0/Essential-fabric_1-19.jar,https://cdn.modrinth.com/data/k2ZPuTBm/versions/1.0.0/Essential-fabric_1-19.jar
+fabric-api,https://cdn.modrinth.com/data/P7dR8mSH/versions/6XyLcjn4/fabric-api-0.73.0%2B1.19.2.jar,https://cdn.modrinth.com/data/P7dR8mSH/versions/PbVeub96/fabric-api-0.73.0%2B1.19.3.jar
+krypton,https://cdn.modrinth.com/data/fQEb0iXm/versions/0.2.1/krypton-0.2.1.jar,https://cdn.modrinth.com/data/fQEb0iXm/versions/0.2.1/krypton-0.2.1.jar
+# dynamic lights not needed if playing with boosted brightness to 500% or 1000%
+lamb-dynamic-lights,https://cdn.modrinth.com/data/yBW8D80W/versions/YQkZSlfq/lambdynamiclights-2.2.0%2B1.19.2.jar,https://cdn.modrinth.com/data/yBW8D80W/versions/9E1ECN95/lambdynamiclights-2.2.0%2B1.19.3.jar
+# lazydfu is version invariant
+lazy-dfu,https://cdn.modrinth.com/data/hvFnDODi/versions/0.1.3/lazydfu-0.1.3.jar,https://cdn.modrinth.com/data/hvFnDODi/versions/0.1.3/lazydfu-0.1.3.jar
+lithium,https://cdn.modrinth.com/data/gvQqBUqZ/versions/7scJ9RTg/lithium-fabric-mc1.19.2-0.10.4.jar,https://cdn.modrinth.com/data/gvQqBUqZ/versions/XS6vJwop/lithium-fabric-mc1.19.3-0.10.4.jar
+mod-menu,https://cdn.modrinth.com/data/mOgUt4GM/versions/V4hnfgRO/modmenu-4.1.2.jar,https://cdn.modrinth.com/data/mOgUt4GM/versions/eIrlBn1Z/modmenu-5.0.2.jar
+raised,https://cdn.modrinth.com/data/nCQRBEiR/versions/41yzExMY/raised-fabric-1.19.2-1.1.4.jar,https://cdn.modrinth.com/data/nCQRBEiR/versions/OvtfPyeu/raised-fabric-1.19.3-1.1.4.jar
+sodium,https://cdn.modrinth.com/data/AANobbMI/versions/rAfhHfow/sodium-fabric-mc1.19.2-0.4.4%2Bbuild.18.jar,https://cdn.modrinth.com/data/AANobbMI/versions/oYfJQ6lR/sodium-fabric-mc1.19.3-0.4.8%2Bbuild.22.jar
+# starlight is version invariant
+starlight,https://cdn.modrinth.com/data/H8CaAYZC/versions/1.1.1%2B1.19/starlight-1.1.1%2Bfabric.ae22326.jar,https://cdn.modrinth.com/data/H8CaAYZC/versions/1.1.1%2B1.19/starlight-1.1.1%2Bfabric.ae22326.jar
+# tabtps useful only in SP worlds and on servers with this mod, also, it's not available on curseforge, unlike other modrinth mods
+tab-tps,https://cdn.modrinth.com/data/cUhi3iB2/versions/WWxVTUNm/tabtps-fabric-mc1.19.2-1.3.15.jar,https://cdn.modrinth.com/data/cUhi3iB2/versions/LhKYYNkm/tabtps-fabric-mc1.19.3-1.3.16.jar
+# mods from github (version invariant):
+biome-thread-local-fix,https://github.com/RedLime/BiomeThreadLocalFix/releases/download/1.3/BiomeThreadLocalFix-1.3.jar
+force-port,https://github.com/DuncanRuns/Force-Port-Mod/releases/download/v1.1.0/forceport-1.1.0.jar
+sleep-background,https://github.com/RedLime/SleepBackground/releases/download/3.8/sleepbackground-3.8-1.15.x-1.19.x.jar
+# mods from curseforge:
+# fps monitor has a github repo, but without releases
+fps-monitor,https://edge.forgecdn.net/files/3921/152/FPS-Monitor-1.19-1.3.0-Fabric.jar,https://edge.forgecdn.net/files/4276/775/FPS-Monitor-1.19-1.3.0-Fabric.jar

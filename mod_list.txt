@@ -1,0 +1,17 @@
+# mods from modrinth:
+# mods from github (version invariant):
+biome-thread-local-fix,https://github.com/RedLime/BiomeThreadLocalFix/releases/download/1.3/BiomeThreadLocalFix-1.3.jar
+force-port,https://github.com/DuncanRuns/Force-Port-Mod/releases/download/v1.1.0/forceport-1.1.0.jar
+sleep-background,https://github.com/RedLime/SleepBackground/releases/download/3.8/sleepbackground-3.8-1.15.x-1.19.x.jar
+# mods from curseforge (slugs):
+fps-monitor
+betterf3
+boosted-brightness
+essential-mod
+fabric-api
+krypton
+lazydfu
+lithium
+modmenu
+sodium
+starlight
