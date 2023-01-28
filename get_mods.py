@@ -4,21 +4,23 @@ import sys
 import os
 import requests
 import shutil
+import dotenv
 
 
 """
 Change only these:
 """
 mc_version = "1.19.3"
-mod_list = "mod_list_1193.txt"
+mod_list = "mod_list.txt"
 #mod_dir = "C:\Users\%username%\AppData\Roaming\.minecraft\mods"
 #mod_dir = f"D:\Minecraft\MultiMC\instances\{mc_version}\.minecraft\mods"
 mod_dir = "D:\Minecraft\MultiMC\instances\\test\.minecraft\mods"
 
 
-
-# curseforge api key
-API_KEY = "$2a$10$Y1FpCvUnvpejIjnADeYDtuoBphtPRmlRub5NKn9Z.sEn3.DySM7Ee"
+dotenv.load_dotenv()
+CURSEFORGE_API_KEY = os.getenv("CURSEFORGE_API_KEY")
+EMAIL = os.getenv("EMAIL")
+modrinth_api_url = "https://api.modrinth.com/v2"
 curseforge_api_url = "https://api.curseforge.com"
 
 
@@ -44,18 +46,10 @@ def clean_mods_dir():
             sys.exit(1)
 
 
-def main():
-    # github and midrinth also have apis, might implement that at some point in the future
-    # downside of github api: can't track minecraft version of the mod
-    github_mods =["biome-thread-local-fix", "force-port", "sleep-background"]
-    
-    # remove existing mods
-    clean_mods_dir()
-
-    # read mod list
+def read_mod_list(path: str) -> list:
     mods = []
     try:
-        with open(mod_list, "r") as f:
+        with open(path, "r") as f:
             for line in f:
                 if line.startswith("#"):
                     continue
@@ -64,22 +58,50 @@ def main():
     except Exception as e:
         print(f"Failed to read the mod list: {e}")
         sys.exit(1)
+    return mods
 
+
+def main():
+    # order of requests: modrinth, curseforge, github
+
+    # github and modrinth also have apis, might implement that at some point in the future
+    # downside of github api: can't track minecraft version of the mod and the mod loader it uses
+    github_mods = ["biome-thread-local-fix", "force-port", "sleep-background"]
+    github_mods_links = ["https://github.com/RedLime/BiomeThreadLocalFix/releases/download/1.3/BiomeThreadLocalFix-1.3.jar", "https://github.com/DuncanRuns/Force-Port-Mod/releases/download/v1.1.0/forceport-1.1.0.jar", "https://github.com/RedLime/SleepBackground/releases/download/3.8/sleepbackground-3.8-1.15.x-1.19.x.jar"]
+    
+    # remove existing mods
+    clean_mods_dir()
+
+    # read mod list
+    mods = read_mod_list(mod_list)
 
     # iterate through mod list
     for i, mod in enumerate(mods):
         ticker = f"[{i+1}/{len(mods)}]"
 
         if mod[0] in github_mods:
-            print(f"{ticker} Downloading {mod[0]} from github...")
+            print(f"{ticker} Downloading {mod[0]} from GitHub...")
             dl_link = mod[1]
         else:
-            print(f"{ticker} Downloading {mod[0]} from curseforge...")
-            # curseforge mods
-            # obtain download mod data
+            # attempt to download from modrinth
+            print(f"{ticker} Searching for {mod[0]} on Modrinth...")
+            headers = {
+                "User-Agent": f"AlwaysGuilty/ModDownloader ({EMAIL})"
+            }
+
+            ##
+
+            # modrinth code here
+
+            ##
+
+
+            print(f"{ticker} Downloading {mod[0]} from CurseForge...")
+            
+            # obtain mod data
             headers = {
                 "Accept": "application/json",
-                "x-api-key": API_KEY
+                "x-api-key": CURSEFORGE_API_KEY
             }
             params = {
                 "gameId": 432,

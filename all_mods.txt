@@ -3,6 +3,7 @@
 better-f3,https://cdn.modrinth.com/data/8shC1gFX/versions/RbNy07Bx/BetterF3-4.0.0-Fabric-1.19.2.jar,https://cdn.modrinth.com/data/8shC1gFX/versions/nuKBXZDI/BetterF3-5.1.0-Fabric-1.19.3.jar
 boosted-brightness,https://cdn.modrinth.com/data/Abyk2Hrg/versions/2.1.2/boosted-brightness-2.1.2%2B1.19.jar,https://cdn.modrinth.com/data/Abyk2Hrg/versions/e71zpNky/boosted-brightness-2.1.3%2B1.19.3.jar
 # essential is version invariant
+# slugs: essential on modrinth, essential-mod on curseforge 
 essential,https://cdn.modrinth.com/data/k2ZPuTBm/versions/1.0.0/Essential-fabric_1-19.jar,https://cdn.modrinth.com/data/k2ZPuTBm/versions/1.0.0/Essential-fabric_1-19.jar
 fabric-api,https://cdn.modrinth.com/data/P7dR8mSH/versions/6XyLcjn4/fabric-api-0.73.0%2B1.19.2.jar,https://cdn.modrinth.com/data/P7dR8mSH/versions/PbVeub96/fabric-api-0.73.0%2B1.19.3.jar
 krypton,https://cdn.modrinth.com/data/fQEb0iXm/versions/0.2.1/krypton-0.2.1.jar,https://cdn.modrinth.com/data/fQEb0iXm/versions/0.2.1/krypton-0.2.1.jar
