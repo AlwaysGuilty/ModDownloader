@@ -10,8 +10,10 @@ For the future, I will probably make it mod loader invariant.
 
 Adjust `mc_version`, `mod_list` and `mod_dir` variables in the [get_mods.py](get_mods.py) and run the script. Make sure you have Python 3 installed.
 
-As for the environemt variables `CURSEFORGE_API_KEY` and `EMAIL`, you can contact me on what to set them to.
-
 ## Why the hardcoded Github entries?
 
 A couple of mods I use are only available on GitHub, which does provide an API, but you can't filter queries by Minecraft version and mod loader.
+
+## Why didn't you just make a modpack?
+
+I don't know, gonna have to look into it.
