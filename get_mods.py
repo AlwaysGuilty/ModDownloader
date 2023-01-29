@@ -16,9 +16,11 @@ mod_list = "mod_list.txt"
 mod_dir = f"D:\Minecraft\MultiMC\instances\{mc_version}\.minecraft\mods"
 
 
+# load environ vars from .env file
 dotenv.load_dotenv()
 CURSEFORGE_API_KEY = os.getenv("CURSEFORGE_API_KEY")
 EMAIL = os.getenv("EMAIL")
+
 modrinth_api_url = "https://api.modrinth.com/v2"
 curseforge_api_url = "https://api.curseforge.com"
 ticker = ""
