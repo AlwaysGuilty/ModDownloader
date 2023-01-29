@@ -13,8 +13,7 @@ Change only these:
 mc_version = "1.19.3"
 mod_list = "mod_list.txt"
 #mod_dir = "C:\Users\%username%\AppData\Roaming\.minecraft\mods"
-#mod_dir = f"D:\Minecraft\MultiMC\instances\{mc_version}\.minecraft\mods"
-mod_dir = "D:\Minecraft\MultiMC\instances\\test\.minecraft\mods"
+mod_dir = f"D:\Minecraft\MultiMC\instances\{mc_version}\.minecraft\mods"
 
 
 dotenv.load_dotenv()
@@ -23,6 +22,7 @@ EMAIL = os.getenv("EMAIL")
 modrinth_api_url = "https://api.modrinth.com/v2"
 curseforge_api_url = "https://api.curseforge.com"
 ticker = ""
+num_completed = 0
 
 
 def log(msg: str):
@@ -169,6 +169,8 @@ def dl_mod(dl_link: str, slug: str, filename: str):
 
 def main():
     global ticker
+    global num_completed
+
     # remove existing mods
     clean_mods_dir()
 
@@ -177,7 +179,7 @@ def main():
 
     # iterate through mod list
     for i, mod in enumerate(mods):
-        ticker = f"[{i+1}/{len(mods)}]"
+        ticker = f"[{i + 1}/{len(mods)}]"
 
         # order of requests: modrinth, curseforge, github
         # search until we find a mod, if we don't find it, skip it
@@ -186,22 +188,25 @@ def main():
         if retval is not None:
             dl_link, filename = retval
             dl_mod(dl_link, mod, filename)
+            num_completed += 1
             continue
 
         retval = get_from_curseforge(mod)
         if retval is not None:
             dl_link, filename = retval
             dl_mod(dl_link, mod, filename)
+            num_completed += 1
             continue
 
         retval = get_from_github(mod)
         if retval is not None:
             dl_link, filename = retval
             dl_mod(dl_link, mod, filename)
+            num_completed += 1
             continue
 
         log(f"Failed to find {mod}, skipping...")
-
+    print(f"Successfully downloaded {num_completed}/{len(mods)} mods")
 
 if __name__ == "__main__":
     main()

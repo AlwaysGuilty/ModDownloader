@@ -1,6 +1,6 @@
 biome-thread-local-fix
 force-port
-sleep-background
+#sleep-background
 fps-monitor
 betterf3
 boosted-brightness
@@ -12,3 +12,4 @@ lithium
 modmenu
 sodium
 starlight
+raised
