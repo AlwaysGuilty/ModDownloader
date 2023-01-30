@@ -27,7 +27,7 @@ mod_dir = f"D:\Minecraft\MultiMC\instances\\test\.minecraft\mods"
 mod_loader = ModLoader.FABRIC.value
 
 
-# load environ vars from .env file
+# load environ vars from .env file or just change them here
 dotenv.load_dotenv()
 CURSEFORGE_API_KEY = os.getenv("CURSEFORGE_API_KEY")
 EMAIL = os.getenv("EMAIL")

@@ -10,7 +10,7 @@ This tool was initially made for personal use, since I use specific Fabric mods 
 
 ## Instructions
 
-Adjust `mc_version`, `mod_list`, `mod_dir` and `mod_loader` variables in the [get_mods.py](get_mods.py) and run the script. Make sure you have Python 3 installed. You will also need to provide CurseForge API key and e-mail. You can get the key by registering on https://console.curseforge.com/ and requesting it there. For the e-mail, contact me on Discord.
+Adjust `mc_version`, `mod_list`, `mod_dir` and `mod_loader` variables in the [get_mods.py](get_mods.py) and run the script. Make sure you have Python 3 installed. You will also need to provide CurseForge API key for accessing CurseForge API and e-mail for accessing Modrinth API. You can get the key by registering on https://console.curseforge.com/ and requesting it there. For the e-mail, contact me on Discord.
 
 
 ## Why the hardcoded Github entries?
