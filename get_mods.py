@@ -8,7 +8,7 @@ import dotenv
 from enum import Enum
 
 
-# supported mod loaders are intersection of those supported by both platforms
+# supported mod loaders are intersection of those supported by CS and Modrinth
 # format: (CurseForge enum, Modrinth name)
 class ModLoader(Enum):
     FORGE = (1, "forge")
@@ -72,33 +72,53 @@ def read_mod_list(path: str) -> list:
     return mods
 
 
+# finds a match among the results from Modrinth and CurseForge APIs
+# returns index and search result 
+# TODO: fuzzy search instead of exact match
+def find_match(results: dict, mod: str) -> tuple:
+    for i, result in enumerate(results):
+        if result["slug"] == mod:
+            return (i, results[i])
+    return None
+
+
 def get_from_modrinth(mod: str) -> tuple:
     log(f"Searching for {mod} on Modrinth...")
     headers = {
         "User-Agent": f"AlwaysGuilty/ModDownloader ({EMAIL})"
     }
-    # params = {
-    #     "query": mod,
-    #     "facets": "[['categories:fabric'], ['versions:" + mc_version + "'], ['project_type:mod']]"
-    # }
-
-    # res = requests.get(modrinth_api_url + "/search", headers=headers, params=params)
-    # assert res.status_code == 200, "Failed to fetch mod data from Modrinth API"
-    # res = res.json()
-    # # iterate through results
-    # mod_found = False
-    # for i, result in enumerate(res["hits"]):
-    #     if result["slug"] == mod:
-    #         mod_found = True
-    # print(f"{ticker} Found {mod} on Modrinth!")
     params = {
-        "loaders": "['" + mod_loader[1] + "']",
-        "game_versions": "[\"" + mc_version + "\"]"
+        "query": mod,
+        "facets": f"[[\"categories:{mod_loader[1]}\"],[\"versions:{mc_version}\"],[\"project_type:mod\"]]"
     }
-    url = modrinth_api_url + "/project/" + mod + "/version"
+
+    url = modrinth_api_url + "/search"
     res = requests.get(url, headers=headers, params=params)
     if res.status_code != 200:
+        log(f"Failed to fetch mod info about {mod} on Modrinth: {res.status_code}")
+        print(res.json())
+        return None
+    
+    
+    res = res.json()["hits"]
+    result = find_match(res, mod)
+    if result is None:
         log(f"Failed to find {mod} on Modrinth")
+        return None
+    _, found_mod = result
+    slug = found_mod["slug"]
+    log(f"Found a match on Modrinth: {slug}")
+
+    
+    params = {
+        "loaders": f"['{mod_loader[1]}']",
+        "game_versions": f"[\"{mc_version}\"]"
+    }
+
+    url = modrinth_api_url + "/project/" + slug + "/version"
+    res = requests.get(url, headers=headers, params=params)
+    if res.status_code != 200:
+        log(f"Failed to fetch download URL for {mod} on Modrinth: {res.status_code}")
         return None
     res = res.json()
     dl_link = res[0]["files"][0]["url"]
@@ -121,34 +141,32 @@ def get_from_curseforge(mod: str) -> tuple:
     url = curseforge_api_url + "/v1/mods/search"
     res = requests.get(url, params=params, headers=headers)
     if res.status_code != 200:
-        log(f"Failed to find {mod} on CurseForge")
+        log(f"Failed to fetch mod info about {mod} on CurseForge: {res.status_code}")
         return None
     
-    # iterate through results to find the correct mod, only searches for an exact match
-    res = res.json()
-    mod_found = False
-    mod_idx = 0
-    for i, result in enumerate(res["data"]):
-        if result["slug"] == mod:
-            mod_found = True
-            mod_idx = i
-            break
-    if not mod_found:
+
+    res = res.json()["data"]
+    result = find_match(res, mod)
+    if result is None:
         log(f"Failed to find {mod} on CurseForge")
         return None
-
+    mod_idx, found_mod = result
+    slug = found_mod["slug"]
+    log(f"Found a match on CurseForge: {slug}")
+    
     # extract modId, fileId and filename
-    modId = res["data"][mod_idx]["id"]
-    files = res["data"][mod_idx]["latestFilesIndexes"]
+    modId = found_mod["id"]
+    files = found_mod["latestFilesIndexes"]
     candidates = [x for x in files if x["gameVersion"] == mc_version and x["modLoader"] == mod_loader[0]]
     fileId = candidates[mod_idx]["fileId"]
     filename = candidates[mod_idx]["filename"]
+
 
     # get download URL from curseforge api
     url = curseforge_api_url + f"/v1/mods/{modId}/files/{fileId}"
     res = requests.get(url, headers=headers)
     if res.status_code != 200:
-        log(f"Failed to fetch download URL for {mod} from CurseForge API")
+        log(f"Failed to fetch download URL for {mod} from CurseForge API: {res.status_code}")
         return None
     dl_link = res.json()["data"]["downloadUrl"]
     return dl_link, filename
@@ -189,11 +207,11 @@ def main():
     global ticker
     global num_completed
 
-    # remove existing mods
-    clean_mods_dir()
-
     # read mod list
     mods = read_mod_list(mod_list)
+
+    # remove existing mods
+    clean_mods_dir()
 
     # iterate through mod list
     for i, mod in enumerate(mods):
